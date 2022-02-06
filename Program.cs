@@ -55,7 +55,26 @@ namespace SleepData
             }
             else if (resp == "2")
             {
-                // TODO: parse data file
+                StreamReader sr = new StreamReader("data.txt");
+                while(!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string week = line.Substring(0, line.IndexOf(","));
+                    string days = line.Substring(line.IndexOf(',') + 1);
+                    
+                    Console.WriteLine($"Week of {DateTime.Parse(week):MMM}, {DateTime.Parse(week):dd}, {DateTime.Parse(week):yyyy}");
+                    Console.WriteLine(" Su Mo Tu We Th Fr Sa");
+                    Console.WriteLine(" -- -- -- -- -- -- --");
+
+                    string[] daysSep = days.Split("|");
+
+                    foreach(string day in daysSep)
+                    {
+                        Console.Write(" {0,-2}", day);
+                    }
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                }
 
             }
         }
